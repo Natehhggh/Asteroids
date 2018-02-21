@@ -18,6 +18,47 @@ namespace Asteroids
 		private int hitBoxRadius;
 		private Vector velocity;
 
+		public int XPos
+		{
+			get { return xPos; }
+			set { xPos = value; }
+		}
+
+		public int YPos
+		{
+			get { return YPos; }
+			set { YPos = value; }
+		}
+
+
+		public int HitBosRadius
+		{
+			get { return hitBoxRadius; }
+			set { hitBoxRadius = value; }
+		}
+
+		public  Vector Velocity
+		{
+			get { return velocity; }
+			set { velocity = value; }
+		}
+
+
+
+
+
+		public GameObject(int x, int y, int r, Vector v)
+		{
+			xPos = x;
+			yPos = y;
+			hitBoxRadius = r;
+			velocity = v;
+		}
+
+
+
+
+
 
 		virtual public void UpdatePostion()
 		{

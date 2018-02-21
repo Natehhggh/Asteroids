@@ -32,7 +32,7 @@ namespace Asteroids
 			Magnitude = 0;
 			Direction = 0;
 		}
-		public Vector(float mag, float dir)
+		public Vector(double mag, double dir)
 		{
 			Magnitude = mag;
 			Direction = dir;
@@ -50,12 +50,34 @@ namespace Asteroids
 		}
 
 
-		//TODO
+		//TODO Check Math, Probably shit
 		public static Vector operator +(Vector v1, Vector v2)
 		{
-			Vector v3 = new Vector();
+			int x, y;
+			x = v1.getX() + v2.getX();
+			y = v1.getY() + v2.getY();
+			double a = 0;
+			double m = Math.Sqrt(x * x + y * y);
+			if(x == 0)
+			{
+				a = Math.PI / 2;
+				if(y < 0)
+				{
+					a += Math.PI;
+				}
+			}
+			else
+			{
+				a = Math.Atan(y / x);
+			}
+			
 
+			if(x < 0)
+			{
+				a += Math.PI;
+			}
 
+			Vector v3 = new Vector(m,a);
 
 
 			return v3;
