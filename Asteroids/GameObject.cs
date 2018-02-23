@@ -7,9 +7,6 @@ using System.Windows;
 
 namespace Asteroids
 {
-	
-
-
 
 	abstract class GameObject
 	{
@@ -30,7 +27,6 @@ namespace Asteroids
 			set { YPos = value; }
 		}
 
-
 		public int HitBosRadius
 		{
 			get { return hitBoxRadius; }
@@ -43,10 +39,6 @@ namespace Asteroids
 			set { velocity = value; }
 		}
 
-
-
-
-
 		public GameObject(int x, int y, int r, Vector v)
 		{
 			xPos = x;
@@ -55,14 +47,10 @@ namespace Asteroids
 			velocity = v;
 		}
 
-
-
-
-
-
 		virtual public void UpdatePostion()
 		{
-
+			this.XPos += velocity.X;
+			this.YPos += velocity.Y;
 		}
 
 	}

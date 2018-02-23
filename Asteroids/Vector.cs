@@ -7,9 +7,15 @@ namespace Asteroids
 {
 	class Vector
 	{
+		/*
 		private double magnitude;
 		private double direction;
+		*/
 
+		private int x;
+		private int y;
+
+		/*
 		public double Magnitude
 		{
 			get { return this.magnitude; }
@@ -26,19 +32,31 @@ namespace Asteroids
 				this.direction = value;
 			}
 		}
+		*/
+		public int X
+		{
+			get { return this.x; }
+			set { this.x = value; }
+		}
+		public int Y
+		{
+			get { return this.y; }
+			set { this.y = value; }
+		}
+
 
 		public Vector()
 		{
-			Magnitude = 0;
-			Direction = 0;
+			X = 0;
+			Y = 0;
 		}
-		public Vector(double mag, double dir)
+		public Vector(int a, int b)
 		{
-			Magnitude = mag;
-			Direction = dir;
+			X = a;
+			Y = b;
 		}
 
-
+		/*
 		public int getX()
 		{
 			return (int)(this.magnitude * Math.Cos(direction));
@@ -47,9 +65,9 @@ namespace Asteroids
 		public int getY()
 		{
 			return (int)(this.magnitude * Math.Sin(direction));
-		}
+		}*/
 
-
+		/*
 		//TODO Check Math, Probably shit
 		public static Vector operator +(Vector v1, Vector v2)
 		{
@@ -82,6 +100,13 @@ namespace Asteroids
 
 			return v3;
 		}
+		*/
+		public static Vector operator +(Vector v1, Vector v2)
+		{
+			Vector v3 = new Vector(v1.X + v2.X, v1.Y + v2.Y);
+			return v3;
+		}
+
 
 	}
 }
