@@ -41,6 +41,8 @@ namespace Asteroids
 			return v3;
 		}
 
+		
+
 		public static Vector operator /(Vector v1, double scalar)
 		{
 			double a, b;

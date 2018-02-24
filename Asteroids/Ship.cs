@@ -11,9 +11,11 @@ namespace Asteroids
 	class Ship : GameObject
 	{
 		private Vector thrust;
+		private Vector thrustPrime;
 		private int maxSpeed;
 		private sbyte turning;
-		private double turnAngle = Math.PI / 50;
+		private bool thrusting;
+		private static double turnAngle = Math.PI / 50;
 
 		public Vector Thrust
 		{
@@ -21,14 +23,17 @@ namespace Asteroids
 			set { thrust = value; }
 		}
 
+		public Vector ThrustPrime
+		{
+			get { return thrustPrime; }
+			set { thrustPrime = value; }
+		}
 
 		public int MaxSpeed
 		{	
 			get { return maxSpeed; }
 			set { maxSpeed = value; }
 		}
-
-		private bool thrusting;
 
 		public bool Thrusting
 		{
@@ -57,28 +62,28 @@ namespace Asteroids
 
 		}
 
-
 		public Ship(int x, int y, int r, Vector v, Vector t, int max) : base(x, y , r ,v)
 		{
 			Thrusting = false;
-			Thrust = t;
+			Thrust = new Vector(t.X,t.Y);
+			ThrustPrime = new Vector(t.X, t.Y);
 			MaxSpeed = max;
-			Angle = -Math.PI / 2;
+			Angle = 0;
 			base.points = new Point[4];
 			UpdatePoints();
+			
 		}
-
 
 		public void UpdateVelocity()
 		{
-			Velocity += Thrust;
+			Velocity += ThrustPrime;
 			
 			if ( Velocity.GetMagnitude() > MaxSpeed)
 			{
 				Velocity = Velocity / (Velocity.GetMagnitude() / MaxSpeed);
 			}
-			Debug.WriteLine("Player Speed: " + Velocity.GetMagnitude());
-			Debug.WriteLine("Max Speed: " + MaxSpeed);
+			//Debug.WriteLine("Player Speed: " + Velocity.GetMagnitude());
+			//Debug.WriteLine("Max Speed: " + MaxSpeed);
 		}
 
 		private void UpdatePoints()
@@ -99,21 +104,17 @@ namespace Asteroids
 				UpdateAngle();
 			}
 			
-
-
 			if (Thrusting)
 			{
 				UpdateVelocity();
 			}
 			base.UpdatePostion();
 
-
 			UpdatePoints();
 		}
 		
 		public void UpdateAngle()
 		{
-			double x = Thrust.X, y =  Thrust.Y;
 			if (turning == -1)
 			{
 				Angle += turnAngle;
@@ -122,9 +123,21 @@ namespace Asteroids
 			{
 				Angle -= turnAngle;
 			}
-			//TODO: fix, Keeps setting thrust to (0,0)
-			Thrust.X = (int)(x * Math.Cos(Angle) - y * Math.Sin(Angle));
-			Thrust.Y = (int)(y * Math.Cos(Angle) + x * Math.Sin(Angle));
+			
+			if (Angle > 2 * Math.PI)
+			{
+				Angle -= 2 * Math.PI;
+			}
+			else if (Angle < 0)
+			{
+				Angle += 2 * Math.PI;
+			}
+			ThrustPrime.X = ((Thrust.X * Math.Cos(Angle)) - (Thrust.Y * Math.Sin(Angle)));
+			ThrustPrime.Y = ((Thrust.X * Math.Sin(Angle)) + (Thrust.Y * Math.Cos(Angle)));
+			Debug.WriteLine("Thrust X: " + Thrust.X);
+			Debug.WriteLine("Thrust Y: " + Thrust.Y);
+			Debug.WriteLine("Thrust' X: " + ThrustPrime.X);
+			Debug.WriteLine("Thrust' Y: " + ThrustPrime.Y);
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace Asteroids
 		private Graphics g;
 		Ship player;
 
-		int maxShipSpeed = 100;
+		int maxShipSpeed = 50;
 
 		public Form1()
 		{
@@ -65,7 +65,7 @@ namespace Asteroids
 
 		private void CreateGameObjects()
 		{
-			player = new Ship(400, 300, 10, new Vector(0, 0), new Vector(5,5), maxShipSpeed);
+			player = new Ship(400, 300, 10, new Vector(0, 0), new Vector(1,0), maxShipSpeed);
 
 
 		}
@@ -103,6 +103,11 @@ namespace Asteroids
 				case Keys.Left:
 				case Keys.Right:
 					player.Turning  = 0;
+					e.Handled = true;
+					break;
+
+				case Keys.Space:
+					player.Velocity = new Vector(0, 0);
 					e.Handled = true;
 					break;
 
