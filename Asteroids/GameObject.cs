@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Drawing;
 
 namespace Asteroids
 {
-
 	abstract class GameObject
 	{
 		private int xPos;	
 		private int yPos;
 		private int hitBoxRadius;
 		private Vector velocity;
+		private double angle;
+		protected Point[] points;
 
 		public int XPos
 		{
@@ -23,11 +25,11 @@ namespace Asteroids
 
 		public int YPos
 		{
-			get { return YPos; }
-			set { YPos = value; }
+			get { return yPos; }
+			set { yPos = value; }
 		}
 
-		public int HitBosRadius
+		public int HitBoxRadius
 		{
 			get { return hitBoxRadius; }
 			set { hitBoxRadius = value; }
@@ -37,6 +39,12 @@ namespace Asteroids
 		{
 			get { return velocity; }
 			set { velocity = value; }
+		}
+
+		public double Angle
+		{
+			get { return angle; }
+			set { angle = value; }
 		}
 
 		public GameObject(int x, int y, int r, Vector v)
@@ -49,8 +57,32 @@ namespace Asteroids
 
 		virtual public void UpdatePostion()
 		{
-			this.XPos += velocity.X;
-			this.YPos += velocity.Y;
+			this.XPos += (int)velocity.X;
+			this.YPos += (int)velocity.Y;
+
+			if(XPos > 800)
+			{
+				this.XPos -= 800;
+			}
+			else if(XPos < 0)
+			{
+				this.XPos += 800;
+			}
+
+			if (YPos > 600)
+			{
+				this.YPos -= 600;
+			}
+			else if (YPos < 0)
+			{
+				this.YPos += 600;
+			}
+
+		}
+		public void DrawObject(Graphics g)
+		{
+			//g.DrawEllipse(Pens.Red, XPos - HitBoxRadius, YPos - HitBoxRadius, HitBoxRadius * 2, HitBoxRadius * 2);
+			g.DrawLines(Pens.White, points);
 		}
 
 	}
