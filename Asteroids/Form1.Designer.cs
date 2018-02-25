@@ -1,6 +1,6 @@
 ﻿namespace Asteroids
 {
-	partial class Form1
+	partial class FrmAsteroids
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAsteroids));
 			this.TmrGameTimer = new System.Windows.Forms.Timer(this.components);
 			this.PbxCanvas = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.PbxCanvas)).BeginInit();
@@ -41,22 +42,18 @@
 			// 
 			// PbxCanvas
 			// 
-			this.PbxCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PbxCanvas.Location = new System.Drawing.Point(0, 0);
+			resources.ApplyResources(this.PbxCanvas, "PbxCanvas");
 			this.PbxCanvas.Name = "PbxCanvas";
-			this.PbxCanvas.Size = new System.Drawing.Size(800, 600);
-			this.PbxCanvas.TabIndex = 0;
 			this.PbxCanvas.TabStop = false;
 			this.PbxCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.PbxCanvas_Paint);
 			// 
-			// Form1
+			// FrmAsteroids
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 600);
 			this.Controls.Add(this.PbxCanvas);
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Name = "FrmAsteroids";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);

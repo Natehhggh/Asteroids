@@ -4,23 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Diagnostics;
+//using System.Diagnostics;
 
 namespace Asteroids
 {
 	class Ship : GameObject
 	{
+		#region private members
+
 		private Vector thrust;
 		private Vector thrustPrime;
 		private int maxSpeed;
 		private sbyte turning;
 		private bool thrusting;
 		private static double turnAngle = Math.PI / 50;
+		private static int projectileRadius = 3;
+
+		#endregion
+
+		#region public members
 
 		public Vector Thrust
 		{
 			get { return thrust; }
-			set { thrust = value; }
 		}
 
 		public Vector ThrustPrime
@@ -30,9 +36,8 @@ namespace Asteroids
 		}
 
 		public int MaxSpeed
-		{	
+		{
 			get { return maxSpeed; }
-			set { maxSpeed = value; }
 		}
 
 		public bool Thrusting
@@ -62,23 +67,55 @@ namespace Asteroids
 
 		}
 
-		public Ship(int x, int y, int r, Vector v, Vector t, int max) : base(x, y , r ,v)
+		#endregion
+
+		#region constructors
+		public Ship(int x, int y, int r, Vector v) : base(x, y, r, v)
 		{
 			Thrusting = false;
-			Thrust = new Vector(t.X,t.Y);
-			ThrustPrime = new Vector(t.X, t.Y);
-			MaxSpeed = max;
+			maxSpeed = 50;
 			Angle = 0;
+			thrust = new Vector(1, 0);
+			ThrustPrime = new Vector(thrust);
+
 			base.points = new Point[4];
 			UpdatePoints();
-			
+		}
+		#endregion
+
+		#region public methods
+
+		public override void UpdatePostion()
+		{
+			if (Turning != 0)
+			{
+				UpdateAngle();
+			}
+
+			if (Thrusting)
+			{
+				UpdateVelocity();
+			}
+			base.UpdatePostion();
+
+			UpdatePoints();
 		}
 
-		public void UpdateVelocity()
+		public Projectile Fire()
+		{
+			Projectile p = new Projectile(this.XPos, this.YPos, projectileRadius, new Vector(), Angle);
+			return p;
+		}
+
+		#endregion
+
+		#region private methods
+
+		private void UpdateVelocity()
 		{
 			Velocity += ThrustPrime;
-			
-			if ( Velocity.GetMagnitude() > MaxSpeed)
+
+			if (Velocity.GetMagnitude() > MaxSpeed)
 			{
 				Velocity = Velocity / (Velocity.GetMagnitude() / MaxSpeed);
 			}
@@ -97,23 +134,9 @@ namespace Asteroids
 			points[3] = points[0];
 		}
 
-		public override void UpdatePostion()
-		{
-			if (Turning != 0)
-			{
-				UpdateAngle();
-			}
-			
-			if (Thrusting)
-			{
-				UpdateVelocity();
-			}
-			base.UpdatePostion();
 
-			UpdatePoints();
-		}
-		
-		public void UpdateAngle()
+
+		private void UpdateAngle()
 		{
 			if (turning == -1)
 			{
@@ -123,7 +146,7 @@ namespace Asteroids
 			{
 				Angle -= turnAngle;
 			}
-			
+
 			if (Angle > 2 * Math.PI)
 			{
 				Angle -= 2 * Math.PI;
@@ -134,10 +157,16 @@ namespace Asteroids
 			}
 			ThrustPrime.X = ((Thrust.X * Math.Cos(Angle)) - (Thrust.Y * Math.Sin(Angle)));
 			ThrustPrime.Y = ((Thrust.X * Math.Sin(Angle)) + (Thrust.Y * Math.Cos(Angle)));
+			/*
 			Debug.WriteLine("Thrust X: " + Thrust.X);
 			Debug.WriteLine("Thrust Y: " + Thrust.Y);
 			Debug.WriteLine("Thrust' X: " + ThrustPrime.X);
 			Debug.WriteLine("Thrust' Y: " + ThrustPrime.Y);
+			*/
 		}
+
+		#endregion
+
+
 	}
 }

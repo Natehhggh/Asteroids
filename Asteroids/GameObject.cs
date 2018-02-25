@@ -52,7 +52,7 @@ namespace Asteroids
 			xPos = x;
 			yPos = y;
 			hitBoxRadius = r;
-			velocity = v;
+			velocity = new Vector(v);
 		}
 
 		virtual public void UpdatePostion()
@@ -79,7 +79,7 @@ namespace Asteroids
 			}
 
 		}
-		public void DrawObject(Graphics g)
+		virtual public void DrawObject(Graphics g)
 		{
 			//g.DrawEllipse(Pens.Red, XPos - HitBoxRadius, YPos - HitBoxRadius, HitBoxRadius * 2, HitBoxRadius * 2);
 			g.DrawLines(Pens.White, points);

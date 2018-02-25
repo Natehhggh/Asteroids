@@ -16,16 +16,46 @@ namespace Asteroids
 {
 	
 
-	public partial class Form1 : Form
+	public partial class FrmAsteroids : Form
 	{
+		#region Global Variables
 		private Graphics g;
-		Ship player;
+		private Ship player;
+		private List<Projectile> projectiles;
+		#endregion
 
-		int maxShipSpeed = 50;
-
-		public Form1()
+		public FrmAsteroids()
 		{
 			InitializeComponent();
+		}
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			g = null;
+			this.DoubleBuffered = true;
+
+			projectiles = new List<Projectile>();
+			CreateGameObjects();
+
+			PbxCanvas.Paint += new PaintEventHandler(PbxCanvas_Paint);
+			TmrGameTimer.Start();
+		}
+
+		private void TmrGameTimer_Tick(object sender, EventArgs e)
+		{
+
+			//this.Invalidate();
+			player.UpdatePostion();
+			for (int i = 0; i < projectiles.Count; i++)
+			{
+				projectiles[i].UpdatePostion();
+				if (projectiles[i].OutOfRange())
+				{
+					projectiles.RemoveAt(i);
+					i--;
+				}
+			}
+			PbxCanvas.Invalidate();
 		}
 
 		private void PbxCanvas_Paint(object sender, PaintEventArgs e)
@@ -38,37 +68,21 @@ namespace Asteroids
 			DrawGameObjects();
 		}
 
-		private void Form1_Load(object sender, EventArgs e)
-		{
-			g = null;
-			this.DoubleBuffered = true;
-
-
-			CreateGameObjects();
-
-			PbxCanvas.Paint += new PaintEventHandler(PbxCanvas_Paint);
-			TmrGameTimer.Start();
-		}
-
-		private void TmrGameTimer_Tick(object sender, EventArgs e)
-		{
-
-			//this.Invalidate();
-			player.UpdatePostion();
-			PbxCanvas.Invalidate();
-		}
-
 		private void DrawGameObjects()
 		{
 			player.DrawObject(g);
+			foreach (GameObject item in projectiles)
+			{
+				item.DrawObject(g);
+			}
 		}
 
 		private void CreateGameObjects()
 		{
-			player = new Ship(400, 300, 10, new Vector(0, 0), new Vector(1,0), maxShipSpeed);
-
-
+			player = new Ship(400, 300, 10, new Vector(0, 0));
 		}
+
+		#region Player Input
 
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -88,6 +102,11 @@ namespace Asteroids
 					player.Turning = -1;
 					e.Handled = true;
 					break;
+
+				case Keys.Space:
+					projectiles.Add(player.Fire());
+					e.Handled = true;
+					break;
 			}
 		}
 
@@ -105,13 +124,9 @@ namespace Asteroids
 					player.Turning  = 0;
 					e.Handled = true;
 					break;
-
-				case Keys.Space:
-					player.Velocity = new Vector(0, 0);
-					e.Handled = true;
-					break;
-
 			}
 		}
+		#endregion
+
 	}
 }

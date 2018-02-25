@@ -34,6 +34,12 @@ namespace Asteroids
 			Y = b;
 		}
 
+		public Vector(Vector v1)
+		{
+			X = v1.X;
+			y = v1.Y;
+		}
+
 
 		public static Vector operator +(Vector v1, Vector v2)
 		{
@@ -45,10 +51,13 @@ namespace Asteroids
 
 		public static Vector operator /(Vector v1, double scalar)
 		{
-			double a, b;
-			a = v1.x;
-			b = v1.y;
-			Vector v3 = new Vector((int)(a / scalar), (int)(b / scalar));
+			Vector v3 = new Vector((int)(v1.x / scalar), (int)(v1.y / scalar));
+			return v3;
+		}
+
+		public static Vector operator *(Vector v1, double scalar)
+		{
+			Vector v3 = new Vector((int)(v1.x * scalar), (int)(v1.y * scalar));
 			return v3;
 		}
 
