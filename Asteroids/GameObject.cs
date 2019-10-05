@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Asteroids
 {
@@ -79,10 +80,10 @@ namespace Asteroids
 			}
 
 		}
-		virtual public void DrawObject(Graphics g)
+		virtual public void DrawObject(PaintEventArgs e)
 		{
 			//g.DrawEllipse(Pens.Red, XPos - HitBoxRadius, YPos - HitBoxRadius, HitBoxRadius * 2, HitBoxRadius * 2);
-			g.DrawLines(Pens.White, points);
+			e.Graphics.DrawLines(Pens.White, points);
 		}
 
 	}

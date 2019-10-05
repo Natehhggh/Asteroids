@@ -32,6 +32,7 @@ namespace Asteroids
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			g = null;
+
 			this.DoubleBuffered = true;
 
 			projectiles = new List<Projectile>();
@@ -60,20 +61,19 @@ namespace Asteroids
 
 		private void PbxCanvas_Paint(object sender, PaintEventArgs e)
 		{
-			g = PbxCanvas.CreateGraphics();
 
 
 			e.Graphics.FillRectangle(Brushes.Black, 0, 0, 800, 600);
 
-			DrawGameObjects();
+			DrawGameObjects(e);
 		}
 
-		private void DrawGameObjects()
+		private void DrawGameObjects(PaintEventArgs e)
 		{
-			player.DrawObject(g);
+			player.DrawObject(e);
 			foreach (GameObject item in projectiles)
 			{
-				item.DrawObject(g);
+				item.DrawObject(e);
 			}
 		}
 
