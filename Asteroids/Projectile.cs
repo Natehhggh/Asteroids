@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Asteroids
 {
@@ -37,9 +38,9 @@ namespace Asteroids
 			distanceTraveled = 0;
 		}
 
-		public override void DrawObject(Graphics g)
+		public override void DrawObject(PaintEventArgs e)
 		{
-			g.FillEllipse(Brushes.White, this.XPos - HitBoxRadius, this.YPos - HitBoxRadius , this.HitBoxRadius * 2, this.HitBoxRadius * 2);
+			e.Graphics.FillEllipse(Brushes.White, this.XPos - HitBoxRadius, this.YPos - HitBoxRadius , this.HitBoxRadius * 2, this.HitBoxRadius * 2);
 		}
 
 		public override void UpdatePostion()

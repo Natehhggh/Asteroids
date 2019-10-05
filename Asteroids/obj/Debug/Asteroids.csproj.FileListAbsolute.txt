@@ -11,3 +11,16 @@ C:\Users\Nathan.Blau\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.Fr
 C:\Users\Nathan.Blau\Documents\GitHub\Asteroids\Asteroids\bin\Debug\yo\Asteroids.resources.dll
 C:\Users\Nathan.Blau\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.FrmAsteroids.yo.resources
 C:\Users\Nathan.Blau\Documents\GitHub\Asteroids\Asteroids\obj\Debug\yo\Asteroids.resources.dll
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\bin\Debug\Asteroids.exe.config
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\bin\Debug\Asteroids.exe
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\bin\Debug\Asteroids.pdb
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\bin\Debug\yo\Asteroids.resources.dll
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.csprojAssemblyReference.cache
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.FrmAsteroids.resources
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.Properties.Resources.resources
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.FrmAsteroids.yo.resources
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.csproj.GenerateResource.cache
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.csproj.CoreCompileInputs.cache
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\yo\Asteroids.resources.dll
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.exe
+C:\Users\Nate\Documents\GitHub\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
