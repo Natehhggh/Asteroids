@@ -22,6 +22,9 @@ namespace Asteroids
 		private Graphics g;
 		private Ship player;
 		private List<Projectile> projectiles;
+		private List<Asteroid> asteroids;
+		private Random random = new Random();
+		private int NumAsteroids = 3;
 		#endregion
 
 		public FrmAsteroids()
@@ -36,6 +39,10 @@ namespace Asteroids
 			this.DoubleBuffered = true;
 
 			projectiles = new List<Projectile>();
+			asteroids = new List<Asteroid>();
+
+
+
 			CreateGameObjects();
 
 			PbxCanvas.Paint += new PaintEventHandler(PbxCanvas_Paint);
@@ -56,6 +63,14 @@ namespace Asteroids
 					i--;
 				}
 			}
+
+
+			for (int i = 0; i < asteroids.Count; i++)
+			{
+				asteroids[i].UpdatePostion();
+			}
+
+
 			PbxCanvas.Invalidate();
 		}
 
@@ -75,11 +90,24 @@ namespace Asteroids
 			{
 				item.DrawObject(e);
 			}
+			foreach (GameObject item in asteroids)
+			{
+				item.DrawObject(e);
+			}
 		}
 
 		private void CreateGameObjects()
 		{
 			player = new Ship(400, 300, 10, new Vector(0, 0));
+
+			for (int i = 0; i < NumAsteroids; i++)
+			{
+				//TODO make this less terrible
+				asteroids.Add(new Asteroid(random.Next(0,800), random.Next(0,600), 50,
+					new Vector( Math.Pow(-1, random.Next(0, 2)) * random.NextDouble() * random.Next(1,3), Math.Pow(-1, random.Next(0, 2)) * random.NextDouble() * random.Next(1, 3)),
+					(int)Math.Pow(-1, random.Next(0,2)), random.Next(1,3) * (Math.PI / 50) ));
+			}
+			
 		}
 
 		#region Player Input

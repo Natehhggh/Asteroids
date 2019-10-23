@@ -119,8 +119,7 @@ namespace Asteroids
 			{
 				Velocity = Velocity / (Velocity.GetMagnitude() / MaxSpeed);
 			}
-			//Debug.WriteLine("Player Speed: " + Velocity.GetMagnitude());
-			//Debug.WriteLine("Max Speed: " + MaxSpeed);
+
 		}
 
 		private void UpdatePoints()
@@ -157,12 +156,6 @@ namespace Asteroids
 			}
 			ThrustPrime.X = ((Thrust.X * Math.Cos(Angle)) - (Thrust.Y * Math.Sin(Angle)));
 			ThrustPrime.Y = ((Thrust.X * Math.Sin(Angle)) + (Thrust.Y * Math.Cos(Angle)));
-			/*
-			Debug.WriteLine("Thrust X: " + Thrust.X);
-			Debug.WriteLine("Thrust Y: " + Thrust.Y);
-			Debug.WriteLine("Thrust' X: " + ThrustPrime.X);
-			Debug.WriteLine("Thrust' Y: " + ThrustPrime.Y);
-			*/
 		}
 
 		#endregion
