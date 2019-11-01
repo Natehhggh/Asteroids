@@ -13,11 +13,23 @@ namespace Asteroids
 		static private double speed = 15;
 
 		static private int range = 2000;
+		static private int damage = 1;
+		private  bool collided;
 		private int distanceTraveled;
+
+		public bool Collided
+		{
+			get { return collided; }
+		}
 
 		public double Speed
 		{
 			get { return speed; }
+		}
+
+		public int Damage
+		{
+			get { return damage; }
 		}
 
 		public int Range
@@ -50,6 +62,15 @@ namespace Asteroids
 			DistanceTraveled += (int)Velocity.GetMagnitude();
 			
 		}
+
+
+		public void collision()
+		{
+			collided = true;
+		}
+
+
+
 
 		public bool OutOfRange()
 		{

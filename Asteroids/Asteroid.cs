@@ -11,12 +11,20 @@ namespace Asteroids
 	{
 		private int rotationDir;
 		private double rotationSpeed;
+		private int health;
+
+
+
+		public int Health
+		{
+			get { return health; }
+		}
 
 
 		public Asteroid(int x, int y, int r, Vector v, int RotationDir, double RotationSpeed) : base(x, y, r, v)
 		{
 			Angle = 0;
-
+			health = 1;
 			rotationDir = RotationDir;
 			rotationSpeed = RotationSpeed;
 
@@ -24,7 +32,7 @@ namespace Asteroids
 			UpdatePoints();
 		}
 
-
+		
 
 
 
@@ -49,5 +57,20 @@ namespace Asteroids
 			UpdatePoints();
 		}
 
+
+		public void CheckProjectileCollision(List<Projectile> projectiles)
+		{
+			for (int i = 0; i < projectiles.Count; i++)
+			{
+				double dist =Math.Sqrt(Math.Pow(this.XPos - projectiles[i].XPos, 2) + Math.Pow(this.YPos - projectiles[i].YPos, 2));
+
+				if (dist <= this.HitBoxRadius + projectiles[i].HitBoxRadius)
+				{
+					health -= projectiles[i].Damage;
+					projectiles[i].collision();
+				}
+
+			}
+		}
 	}
 }

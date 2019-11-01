@@ -64,10 +64,30 @@ namespace Asteroids
 				}
 			}
 
-
 			for (int i = 0; i < asteroids.Count; i++)
 			{
 				asteroids[i].UpdatePostion();
+			}
+
+
+			//Hit Detection
+			for (int i = 0; i < asteroids.Count; i++)
+			{
+				asteroids[i].CheckProjectileCollision(projectiles);
+				if (asteroids[i].Health == 0)
+				{
+					asteroids.RemoveAt(i);
+					i--;
+				}
+			}
+
+			for (int i = 0; i < projectiles.Count; i++)
+			{
+				if (projectiles[i].Collided)
+				{
+					projectiles.RemoveAt(i);
+					i--;
+				}
 			}
 
 
